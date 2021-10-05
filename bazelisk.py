@@ -207,12 +207,6 @@ def determine_executable_filename_suffix():
 
 def determine_bazel_filename(version):
     machine = normalized_machine_arch_name()
-    if machine != "x86_64":
-        raise Exception(
-            'Unsupported machine architecture "{}". Bazel currently only supports x86_64.'.format(
-                machine
-            )
-        )
 
     operating_system = get_operating_system()
 
@@ -224,10 +218,7 @@ def determine_bazel_filename(version):
 
 
 def normalized_machine_arch_name():
-    machine = platform.machine().lower()
-    if machine == "amd64":
-        machine = "x86_64"
-    return machine
+    return platform.machine().lower()
 
 
 def determine_url(version, is_commit, bazel_filename):
